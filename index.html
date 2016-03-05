@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0" />
+    <title>{{ title }}</title>
+    <!-- CSS  -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/materialize.min.css" type="text/css" rel="stylesheet" media="screen,projection" />
+    <link href="css/style.css" type="text/css" rel="stylesheet" media="screen,projection" />
+
+      <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.0/angular.min.js"></script>
+    <script src="js/materialize.js"></script>
+    <script src="js/init.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/TimeSheetCalculator/timesheet.js"></script>
+</head>
+
+<body ng-app="app">
+    <nav class="light-blue lighten-1" role="navigation">
+        <div class="nav-wrapper container"><a id="logo-container" href="#" class="brand-logo">{{ title }}</a></div>
+    </nav>
+    <div class="section no-pad-bot" id="index-banner">
+        <div class="container">
+            <br>
+            <br>
+            <h1 class="header center orange-text">Starter Template</h1>
+            <div class="row center">
+                <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
+            </div>
+        </div>
+    </div>
+
+    <div class="container" ng-controller="CalculatorController as calculator"> <!-- BEGIN CALCULATOR -->
+        <div class="section">
+            <!--   Icon Section   -->
+            <div class="row">
+                <form class="col s12" ng-submit="calculator.calculateHours()">
+                    <div class="row calculator-row">
+
+                        <div class="input-field col l8 s12 offset-l2 offset-s3" ng-repeat="day in calculator.days">
+
+                            <div class="divider"></div>                                
+                            <!-- <h6>{{ day.name }}</h6> -->
+                            <div class="section col s12 m6 l5">
+                                <select class="hour" ng-attr-id="{{ day.code + '_starthour'}}" >
+                                    <option value="{{ ::hour }}" ng-repeat="hour in calculator.range(1,12)">{{ ::hour }}</option>
+                                </select> :
+                                <select class="minute" ng-attr-id="{{ day.code + '_startmin'}}">
+                                    <option value="{{ ::minute | two_digits }}" ng-repeat="minute in calculator.range(0,60)">{{ ::minute | two_digits }}</option>
+                                </select>
+                                <select class="meridiem" ng-attr-id="{{ day.code + '_startmerid'}}">
+                                    <option value="am" selected>A.M.</option>
+                                    <option value="pm">P.M.</option>
+                                </select>
+                                <label for="{{ day.code + '_starthour'}}">Start</label>
+
+                            </div>
+
+                            <div class="col s12 m6 l5 offset-m3">
+                                <select class="hour" ng-attr-id="{{ day.code + '_endhour'}}" >
+                                    <option value="{{ ::hour }}" ng-repeat="hour in calculator.range(1,12)">{{ ::hour }}</option>
+                                </select> :
+                                <select class="minute" ng-attr-id="{{ day.code + '_endmin'}}" >
+                                    <option value="{{ ::minute | two_digits }}" ng-repeat="minute in calculator.range(0,60)">{{ ::minute | two_digits }}</option>
+                                </select>
+                                <select class="meridiem" ng-attr-id="{{ day.code + '_endmerid'}}">
+                                    <option value="am" >A.M.</option>
+                                    <option value="pm" selected>P.M.</option>
+                                </select>
+                                <label for="{{ day.code + '_endhour'}}">End</label>
+                            </div>
+
+                            <div class="col s12 m12 l2">
+                                {{ day.hours | number: 2 }} hours
+                            </div>
+
+                        </div>
+
+                          <div class="col l4 m8 s12 offset-">
+                            <button class="btn" type="submit" name="action">Submit
+                              <i class="material-icons right">send</i>
+                            </button>
+                          </div>
+
+                          <div class="col s2 m12 l2">
+                            Total: {{ calculator.hours | number: 2  }} hours
+                          </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <br>
+        <br>
+        <div class="section">
+        </div>
+    </div> <!-- END CALCULATOR -->
+
+    <footer class="page-footer orange"> <!-- BEGIN FOOTER -->
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">Company Bio</h5>
+                    <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Settings</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+                <div class="col l3 s12">
+                    <h5 class="white-text">Connect</h5>
+                    <ul>
+                        <li><a class="white-text" href="#!">Link 1</a></li>
+                        <li><a class="white-text" href="#!">Link 2</a></li>
+                        <li><a class="white-text" href="#!">Link 3</a></li>
+                        <li><a class="white-text" href="#!">Link 4</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+            </div>
+        </div>
+    </footer> <!-- END FOOTER -->
+
+    <!--  Scripts-->
+  
+</body>
+
+</html>
